@@ -1,6 +1,10 @@
-# Dockerfile for book_catalog microservice
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
+
+# Install PostgreSQL development libraries
+RUN apt-get update && apt-get install -y \
+    libpq-dev gcc && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container
 WORKDIR /app
