@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM --platform=linux/amd64 python:3.9-slim
+FROM python:3.10-slim
 
 # Install PostgreSQL development libraries
 RUN apt-get update && apt-get install -y \
@@ -19,4 +19,6 @@ RUN pip install --no-cache-dir -r book_catalog/requirements.txt
 EXPOSE 80
 
 # Run main.py when the container launches
-CMD ["python", "book_catalog/main.py"]
+# CMD ["python", "book_catalog/main.py"]
+# CMD ["python", "book_catalog/main.py", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "book_catalog.main:app", "--host", "0.0.0.0", "--port", "80"]
